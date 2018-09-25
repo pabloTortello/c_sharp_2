@@ -18,6 +18,10 @@ namespace StarWars
         /// <summary>Массив графических игровых объекотв</summary>
         private static GameObject[] __GameObjects;
 
+        private static Asteroid[] __Asteroids;
+
+        //private static Bullet __Bullet;
+
         /// <summary>Буфер, в который будем проводить отрисовку графики очередного кадра</summary>
         public static BufferedGraphics Buffer { get; private set; }
 
@@ -27,21 +31,33 @@ namespace StarWars
         public static int Height { get; private set; }
 
         /// <summary>Загрузка данных игровой логики</summary>
-        public static void Load()
+        public static void Load(Form form)
         {
-            __GameObjects = new GameObject[50];
+            Width = form.Width;
+            Height = form.Height;
 
-            //for (var i = 0; i < __GameObjects.Length / 2; i++)
-            //    __GameObjects[i] = new GameObject(
-            //        new Point(600, i * 20),
-            //        new Point(15 - i, 15 - i),
-            //        new Size(20, 20));
+            __GameObjects = new GameObject[50];
 
             for (var i = 0; i < __GameObjects.Length; i++)
                 __GameObjects[i] = new Star(
-                    new Point(__Rnd.Next(20, 600), i * 20),
+                    new Point(__Rnd.Next(0, Height), i * 20),
                     new Point(__Rnd.Next(5, 7), 0),
                     new Size(5, 5));
+
+            const int asteroids_count = 10;
+            __Asteroids = new Asteroid[asteroids_count];
+
+            for (var i = 0; i < asteroids_count; i++)
+            {
+                var speed = __Rnd.Next(3, 7);
+                var size = __Rnd.Next(30, 50);
+                __Asteroids[i] = new Asteroid(
+                    new Point(__Rnd.Next(Width + 600), __Rnd.Next(0, Height)),
+                    new Point(-speed, speed),
+                    new Size(size, size));
+            }
+
+            //__Bullet = new Bullet(new Point(0, 200), new Size(4, 1));
         }
 
         /// <summary>Инициализация игровой логики</summary>
@@ -73,14 +89,14 @@ namespace StarWars
             var g = Buffer.Graphics; // Извлекаем графический контекст для рисования
             g.Clear(Color.Black);    // Заливаем всю поверхность одним цветом (чёрным)
 
-            #region Пример рисования примитивов для проверки процесса создания игровой сцены
-            //g.DrawRectangle(Pens.White, 100, 100, 200, 200);  // Рисуем прямоугольник
-            g.FillEllipse(Brushes.Orange, 600, 100, 100, 100);   // Заливаем эллипс
-            #endregion
+            g.FillEllipse(Brushes.Orange, 600, 100, 100, 100);   // Солнце
 
             // Пробегаемся по всем графическим объектам и вызываем у каждого метод отрисовки
             foreach (var game_object in __GameObjects)
                 game_object.Draw();
+
+            foreach (var asteroid in __Asteroids)
+                asteroid.Draw();
 
             Buffer.Render(); // Переносим содержимое буфера на экран
         }
@@ -91,6 +107,9 @@ namespace StarWars
             // Пробегаемся по всем игровым объектам
             foreach (var game_object in __GameObjects)
                 game_object.Update(); // И вызываем у каждого метод обновления состояния
+
+            foreach (var asteroid in __Asteroids)
+                asteroid.Update();
         }
     }
 }

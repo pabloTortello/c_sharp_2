@@ -14,6 +14,8 @@ namespace StarWars
         /// <summary>Размер на игровой сцене</summary>
         protected Size _Size;
 
+        
+
         /// <summary>Инициализация нового игрового объекта</summary>
         /// <param name="Position">ПОложение на игровой сцене</param>
         /// <param name="Speed">Скорость перемещения между кадрами</param>
@@ -35,13 +37,13 @@ namespace StarWars
         public virtual void Update()
         {
             _Position.X += _Speed.X;  // Перемещаем объект на сцене в соответствии с вектором скорости
-            _Position.Y += _Speed.Y;
 
             // Проверяем граничные условия выхдода объекта за пределы сцены (меняем знак соответствующей составляющей вектора скорости)
-            if (_Position.X < 0 || _Position.X > Game.Width - _Size.Width)
-                _Speed.X *= -1;
-            if (_Position.Y < 0 || _Position.Y > Game.Height - _Size.Height)
-                _Speed.Y *= -1;
+            if (_Position.X < 0)
+            {
+                _Position.X = Game.Width;
+                //_Position.Y = 
+            }
         }
     }
 }
