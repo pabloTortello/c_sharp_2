@@ -1,9 +1,10 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace StarWars
 {
     /// <summary>Игровой объект (инкапсулирующий логику риосвания на игровой сцене, перемещение и взаимодействие с другими объектами)</summary>
-    internal class GameObject
+    internal abstract class GameObject : ICollision
     {
         /// <summary>Положение на экране</summary>
         protected Point _Position;
@@ -14,7 +15,7 @@ namespace StarWars
         /// <summary>Размер на игровой сцене</summary>
         protected Size _Size;
 
-        
+        public Rectangle Rect => new Rectangle(_Position, _Size);
 
         /// <summary>Инициализация нового игрового объекта</summary>
         /// <param name="Position">ПОложение на игровой сцене</param>
@@ -25,6 +26,12 @@ namespace StarWars
             _Position = Position;
             _Speed = Speed;
             _Size = Size;
+        }
+
+        public bool Collision(ICollision obj)
+        {
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
+            return Rect.IntersectsWith(obj.Rect);
         }
 
         /// <summary>Метод отрисовки графики объекта на игровой сцене</summary>
@@ -42,7 +49,6 @@ namespace StarWars
             if (_Position.X < 0)
             {
                 _Position.X = Game.Width;
-                //_Position.Y = 
             }
         }
     }

@@ -39,6 +39,13 @@ namespace StarWars
             return (Asteroid)this.Clone();
         }
 
+
+        public void Spawn()
+        {
+            _Position.X = Game.Width;
+            _Position.Y = __Rnd.Next(0, Game.Height);
+        }
+
         public void Update()
         {
             _Position.X += _Speed.X;  // Перемещаем объект на сцене в соответствии с вектором скорости

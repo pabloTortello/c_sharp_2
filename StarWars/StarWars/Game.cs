@@ -20,7 +20,7 @@ namespace StarWars
 
         private static Asteroid[] __Asteroids;
 
-        //private static Bullet __Bullet;
+        private static Bullet __Bullet;
 
         /// <summary>Буфер, в который будем проводить отрисовку графики очередного кадра</summary>
         public static BufferedGraphics Buffer { get; private set; }
@@ -57,7 +57,7 @@ namespace StarWars
                     new Size(size, size));
             }
 
-            //__Bullet = new Bullet(new Point(0, 200), new Size(4, 1));
+            __Bullet = new Bullet(new Point(0, 200), new Size(4, 1));
         }
 
         /// <summary>Инициализация игровой логики</summary>
@@ -98,6 +98,8 @@ namespace StarWars
             foreach (var asteroid in __Asteroids)
                 asteroid.Draw();
 
+            __Bullet.Draw();
+
             Buffer.Render(); // Переносим содержимое буфера на экран
         }
 
@@ -109,7 +111,16 @@ namespace StarWars
                 game_object.Update(); // И вызываем у каждого метод обновления состояния
 
             foreach (var asteroid in __Asteroids)
+            {
                 asteroid.Update();
+                if (asteroid.Collision(__Bullet))
+                {
+                    asteroid.Spawn();
+                    __Bullet.Spawn();
+                }
+            }
+
+            __Bullet.Update();
         }
     }
 }
