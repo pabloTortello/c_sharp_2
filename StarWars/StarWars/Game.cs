@@ -22,6 +22,8 @@ namespace StarWars
 
         private static Bullet __Bullet;
 
+        private static Ship __Ship;
+
         /// <summary>Буфер, в который будем проводить отрисовку графики очередного кадра</summary>
         public static BufferedGraphics Buffer { get; private set; }
 
@@ -56,6 +58,11 @@ namespace StarWars
                     new Point(-speed, speed),
                     new Size(size, size));
             }
+
+            __Ship = new Ship(
+                new Point(10, 300),
+                new Point(1, 1),
+                new Size(38, 34));
 
             __Bullet = new Bullet(new Point(0, 200), new Size(4, 1));
         }
@@ -97,6 +104,8 @@ namespace StarWars
 
             foreach (var asteroid in __Asteroids)
                 asteroid.Draw();
+
+            __Ship.Draw();
 
             __Bullet.Draw();
 
