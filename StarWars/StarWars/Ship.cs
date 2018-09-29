@@ -10,7 +10,7 @@ namespace StarWars
     {
         public event Action ShipDie;
 
-        public int Eneregy { set; get; } = 3;
+        public int HP { set; get; } = 3;
 
         private readonly Image _img = Image.FromFile("src/ship.png");
 
@@ -33,9 +33,15 @@ namespace StarWars
                 _Position.Y += _Speed.Y;
         }
 
-        public void Damage()
+        public void HP_down()
         {
-            Eneregy--;
+            HP--;
+        }
+
+        public void HP_up()
+        {
+            if (HP < 3)
+                HP++;
         }
 
         public void Die()

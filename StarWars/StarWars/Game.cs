@@ -15,6 +15,8 @@ namespace StarWars
         /// <summary>Таймер обновления игрового интерфейса</summary>
         private static readonly Timer __Timer = new Timer { Interval = 50 };
 
+        private static readonly Timer __Timer_for_medicine = new Timer { Interval = 20000 };
+
         /// <summary>Массив графических игровых объекотв</summary>
         private static GameObject[] __GameObjects;
 
@@ -23,6 +25,10 @@ namespace StarWars
         private static Bullet __Bullet;
 
         private static Ship __Ship;
+
+        private static Medicine __Medicine; //аптечка
+
+        private static HP[] __hp;
 
         /// <summary>Буфер, в который будем проводить отрисовку графики очередного кадра</summary>
         public static BufferedGraphics Buffer { get; private set; }
@@ -65,7 +71,15 @@ namespace StarWars
                 new Size(38, 34));
             __Ship.ShipDie += OnShipDie;
 
-            //__Bullet = new Bullet(new Point(0, 200), new Size(4, 1));
+            __hp = new HP[__Ship.HP];
+            for (int i = 0; i < __hp.Length; i++)
+            {
+                __hp[i] = new HP(
+                    new Point(10 + i * 40, 10),
+                    new Point(0, 0),
+                    new Size(30, 30));
+            }
+            
         }
 
         private static void OnShipDie()
@@ -93,6 +107,11 @@ namespace StarWars
 
             __Timer.Tick += OnTimerTick;
             __Timer.Enabled = true;
+
+            __Timer_for_medicine.Tick += OnTimerTick_for_medicine;
+            __Timer_for_medicine.Enabled = true;
+
+            //__hp = new HP(__Ship.HP);
         }
 
         private static void OnGameFormKeyPress(object sender, KeyEventArgs args)
@@ -113,6 +132,16 @@ namespace StarWars
                     __Ship.Die();
                     break;
             }   
+        }
+
+        private static void OnTimerTick_for_medicine(object Sender, EventArgs e)
+        {
+            //int z = __Rnd.Next(1, 3);
+            //if (z == 2)
+                __Medicine = new Medicine(
+                    new Point(Width, __Rnd.Next(0, Height)),
+                    new Point(-5, 5),
+                    new Size(30, 30));
         }
 
         /// <summary>Метод, вызываемвый таймером всякий раз при истечении указанного интервала времени</summary>
@@ -137,9 +166,14 @@ namespace StarWars
             foreach (var asteroid in __Asteroids)
                 asteroid.Draw();
 
+            for (int i = 0; i < __Ship.HP; i++)
+                __hp[i].Draw();
+
             __Ship?.Draw();
 
             __Bullet?.Draw();
+
+            __Medicine?.Draw();
 
             Buffer.Render(); // Переносим содержимое буфера на экран
         }
@@ -154,26 +188,33 @@ namespace StarWars
             foreach (var asteroid in __Asteroids)
             {
                 asteroid.Update();
-                if (__Bullet != null)
-                    if (asteroid.Collision(__Bullet))
+                if (__Bullet != null && asteroid.Collision(__Bullet)) 
+                {
+                    asteroid.Spawn();
+                    __Bullet = null;
+                }
+                if (__Ship != null && __Ship.Collision(asteroid))
+                {
+                    asteroid.Spawn();
+                    __Ship.HP_down();
+                    if (__Ship.HP < 1)
                     {
-                        asteroid.Spawn();
-                        __Bullet = null;
+                        __Ship.Die();
+                        //break;
                     }
-                if (__Ship != null)
-                    if (__Ship.Collision(asteroid))
-                    {
-                        asteroid.Spawn();
-                        __Ship.Damage();
-                        if (__Ship.Eneregy < 1)
-                        {
-                            __Ship.Die();
-                            //break;
-                        }
-                    }
+                }
+
+                if (__Ship != null && __Medicine != null && __Ship.Collision(__Medicine))
+                {
+                    __Ship.HP_up();
+                    __Medicine = null;
+                }
             }
 
+            __Medicine?.Update();
+
             __Bullet?.Update();
+
         }
     }
 }
