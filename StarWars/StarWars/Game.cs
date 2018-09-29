@@ -30,6 +30,8 @@ namespace StarWars
 
         private static HP[] __hp;
 
+        private static int __Score = 0;
+
         /// <summary>Буфер, в который будем проводить отрисовку графики очередного кадра</summary>
         public static BufferedGraphics Buffer { get; private set; }
 
@@ -176,6 +178,8 @@ namespace StarWars
 
             __Medicine?.Draw();
 
+            Buffer.Graphics.DrawString(__Score.ToString(), new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold), Brushes.White, 700, 10);
+
             Buffer.Render(); // Переносим содержимое буфера на экран
         }
 
@@ -191,6 +195,7 @@ namespace StarWars
                 asteroid.Update();
                 if (__Bullet != null && asteroid.Collision(__Bullet)) 
                 {
+                    __Score++;
                     asteroid.Spawn();
                     __Bullet = null;
                 }
