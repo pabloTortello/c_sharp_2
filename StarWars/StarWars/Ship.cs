@@ -17,5 +17,16 @@ namespace StarWars
             Game.Buffer.Graphics.DrawImage(_img, _Position.X, _Position.Y, _Size.Width, _Size.Height);
         }
 
+        public void Up()
+        {
+            if (_Position.Y > 0)
+                _Position.Y -= _Speed.Y;
+        }
+
+        public void Down()
+        {
+            if (_Position.Y < Game.Height - _Size.Height)
+                _Position.Y += _Speed.Y;
+        }
     }
 }

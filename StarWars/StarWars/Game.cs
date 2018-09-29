@@ -61,7 +61,7 @@ namespace StarWars
 
             __Ship = new Ship(
                 new Point(10, 300),
-                new Point(1, 1),
+                new Point(5, 5),
                 new Size(38, 34));
 
             __Bullet = new Bullet(new Point(0, 200), new Size(4, 1));
@@ -73,6 +73,7 @@ namespace StarWars
         {
             Width = form.Width;
             Height = form.Height;
+            form.KeyDown += OnGameFormKeyPress;
 
             __Context = BufferedGraphicsManager.Current;
 
@@ -81,6 +82,23 @@ namespace StarWars
 
             __Timer.Tick += OnTimerTick;
             __Timer.Enabled = true;
+        }
+
+        private static void OnGameFormKeyPress(object sender, KeyEventArgs args)
+        {
+            switch (args.KeyCode)
+            {
+                case Keys.ControlKey:
+                    var ship_location = __Ship.Rect.Location;
+                    __Bullet = new Bullet(new Point(ship_location.X + 38, ship_location.Y + 17), new Size(4, 1));
+                    break;
+                case Keys.Up:
+                    __Ship.Up();
+                    break;
+                case Keys.Down:
+                    __Ship.Down();
+                    break;
+            }   
         }
 
         /// <summary>Метод, вызываемвый таймером всякий раз при истечении указанного интервала времени</summary>
@@ -107,7 +125,7 @@ namespace StarWars
 
             __Ship.Draw();
 
-            __Bullet.Draw();
+            __Bullet?.Draw();
 
             Buffer.Render(); // Переносим содержимое буфера на экран
         }
@@ -122,14 +140,15 @@ namespace StarWars
             foreach (var asteroid in __Asteroids)
             {
                 asteroid.Update();
-                if (asteroid.Collision(__Bullet))
-                {
-                    asteroid.Spawn();
-                    __Bullet.Spawn();
-                }
+                if (__Bullet != null)
+                    if (asteroid.Collision(__Bullet))
+                    {
+                        asteroid.Spawn();
+                        __Bullet = null;
+                    }
             }
 
-            __Bullet.Update();
+            __Bullet?.Update();
         }
     }
 }
