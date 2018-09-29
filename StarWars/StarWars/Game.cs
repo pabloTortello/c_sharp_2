@@ -166,8 +166,9 @@ namespace StarWars
             foreach (var asteroid in __Asteroids)
                 asteroid.Draw();
 
-            for (int i = 0; i < __Ship.HP; i++)
-                __hp[i].Draw();
+            if (__Ship != null)
+                for (int i = 0; i < __Ship.HP; i++)
+                    __hp[i].Draw();
 
             __Ship?.Draw();
 
