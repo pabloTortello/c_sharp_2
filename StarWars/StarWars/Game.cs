@@ -63,8 +63,19 @@ namespace StarWars
                 new Point(10, 300),
                 new Point(5, 5),
                 new Size(38, 34));
+            __Ship.ShipDie += OnShipDie;
 
-            __Bullet = new Bullet(new Point(0, 200), new Size(4, 1));
+            //__Bullet = new Bullet(new Point(0, 200), new Size(4, 1));
+        }
+
+        private static void OnShipDie()
+        {
+            __Timer.Enabled = false;
+            var g = Buffer.Graphics;
+            g.Clear(Color.Black);
+            g.DrawString("GAME OVER", new Font(FontFamily.GenericSansSerif, 60, FontStyle.Bold), Brushes.White, 200, 100);
+            Buffer.Render();
+            __Ship = null;
         }
 
         /// <summary>Инициализация игровой логики</summary>
@@ -98,6 +109,9 @@ namespace StarWars
                 case Keys.Down:
                     __Ship.Down();
                     break;
+                case Keys.W:
+                    __Ship.Die();
+                    break;
             }   
         }
 
@@ -123,7 +137,7 @@ namespace StarWars
             foreach (var asteroid in __Asteroids)
                 asteroid.Draw();
 
-            __Ship.Draw();
+            __Ship?.Draw();
 
             __Bullet?.Draw();
 
@@ -145,6 +159,17 @@ namespace StarWars
                     {
                         asteroid.Spawn();
                         __Bullet = null;
+                    }
+                if (__Ship != null)
+                    if (__Ship.Collision(asteroid))
+                    {
+                        asteroid.Spawn();
+                        __Ship.Damage();
+                        if (__Ship.Eneregy < 1)
+                        {
+                            __Ship.Die();
+                            //break;
+                        }
                     }
             }
 

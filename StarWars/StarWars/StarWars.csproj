@@ -51,6 +51,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="ICollision.cs" />
+    <Compile Include="Medicine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ship.cs" />
@@ -76,6 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\asteroid.png" />
+    <Content Include="src\medicine.png" />
+    <Content Include="src\ship.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

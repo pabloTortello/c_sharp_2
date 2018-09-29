@@ -8,7 +8,11 @@ namespace StarWars
 {
     class Ship : GameObject
     {
-        static Image _img = Image.FromFile("src/ship.png");
+        public event Action ShipDie;
+
+        public int Eneregy { set; get; } = 3;
+
+        private readonly Image _img = Image.FromFile("src/ship.png");
 
         public Ship(Point position, Point speed, Size size) : base(position, speed, size) { }
 
@@ -27,6 +31,16 @@ namespace StarWars
         {
             if (_Position.Y < Game.Height - _Size.Height)
                 _Position.Y += _Speed.Y;
+        }
+
+        public void Damage()
+        {
+            Eneregy--;
+        }
+
+        public void Die()
+        {
+            ShipDie?.Invoke();
         }
     }
 }
