@@ -13,8 +13,12 @@ namespace StarWars
         {
             #region Активация стилей оформления пользовательского интерфейса для приложения Win-Forms
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false); 
+            Application.SetCompatibleTextRenderingDefault(false);
             #endregion
+
+            Application.Run(new Splashscreen());
+
+
 
             // Создаём главную форму
             Form game_form = new Form
