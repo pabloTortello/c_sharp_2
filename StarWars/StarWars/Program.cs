@@ -52,6 +52,8 @@ namespace StarWars
             //game_form.Controls.Add(highscores_btn);
             //game_form.Controls.Add(exit_btn);
 
+            //new_game_btn.Click += new EventHandler(Game.New_Game);
+
             Game.Load(game_form);           // Загрузка данных игровой логики
             Game.Init(game_form);  // Инициализация игровой логики
 
@@ -62,6 +64,9 @@ namespace StarWars
             //Game.Draw();         // Отрисовываем кадр
 
             Application.Run(game_form); // Запускаем процесс обработки очереди сообщений Windows
+
+            
+
         }
     }
 }

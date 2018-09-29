@@ -83,7 +83,12 @@ namespace StarWars
                     new Point(0, 0),
                     new Size(30, 30));
             }
+        }
+
+        public static void New_Game(object sender, EventArgs e)
+        {
             
+
         }
 
         private static void OnShipDie()
@@ -167,8 +172,9 @@ namespace StarWars
             foreach (var game_object in __GameObjects)
                 game_object.Draw();
 
-            foreach (var asteroid in __Asteroids)
-                asteroid.Draw();
+            if (__Asteroids != null)
+                foreach (var asteroid in __Asteroids)
+                    asteroid.Draw();
 
             if (__Ship != null)
                 for (int i = 0; i < __Ship.HP; i++)
@@ -192,37 +198,40 @@ namespace StarWars
             foreach (var game_object in __GameObjects)
                 game_object.Update(); // И вызываем у каждого метод обновления состояния
 
-            foreach (var asteroid in __Asteroids)
-            {
-                asteroid.Update();
-                if (__Bullet != null && asteroid.Collision(__Bullet)) 
+            if (__Asteroids != null)
+                foreach (var asteroid in __Asteroids)
                 {
-                    __Score++;
-                    asteroid.Spawn();
-                    __Bullet = null;
-                }
-                if (__Ship != null && __Ship.Collision(asteroid))
-                {
-                    asteroid.Spawn();
-                    __Ship.HP_down();
-                    if (__Ship.HP < 1)
+                    asteroid.Update();
+                    if (__Bullet != null && asteroid.Collision(__Bullet)) 
                     {
-                        __Ship.Die();
-                        //break;
+                        __Score++;
+                        asteroid.Spawn();
+                        __Bullet = null;
+                    }
+                    if (__Ship != null && __Ship.Collision(asteroid))
+                    {
+                        asteroid.Spawn();
+                        __Ship.HP_down();
+                        if (__Ship.HP < 1)
+                        {
+                            __Ship.Die();
+                            //break;
+                        }
+                    }
+
+                    if (__Ship != null && __Medicine != null && __Ship.Collision(__Medicine))
+                    {
+                        __Ship.HP_up();
+                        __Medicine = null;
                     }
                 }
-
-                if (__Ship != null && __Medicine != null && __Ship.Collision(__Medicine))
-                {
-                    __Ship.HP_up();
-                    __Medicine = null;
-                }
-            }
 
             __Medicine?.Update();
 
             __Bullet?.Update();
 
         }
+
+        
     }
 }
