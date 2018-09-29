@@ -32,6 +32,8 @@ namespace StarWars
 
         private static int __Score = 0;
 
+        public static string user_name;
+
         /// <summary>Буфер, в который будем проводить отрисовку графики очередного кадра</summary>
         public static BufferedGraphics Buffer { get; private set; }
 
