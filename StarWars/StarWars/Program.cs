@@ -16,7 +16,7 @@ namespace StarWars
             Application.SetCompatibleTextRenderingDefault(false);
             #endregion
 
-            //Application.Run(new Splashscreen());
+            Application.Run(new Splashscreen());
 
 
 
