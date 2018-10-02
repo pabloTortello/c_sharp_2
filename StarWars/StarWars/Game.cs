@@ -31,7 +31,7 @@ namespace StarWars
 
         private static HP[] __hp;
 
-        private static int __Score = 0;
+        public static int Score { set; get; } = 0;
 
         public static string user_name;
 
@@ -196,7 +196,7 @@ namespace StarWars
 
             __Medicine?.Draw();
 
-            Buffer.Graphics.DrawString(__Score.ToString(), new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold), Brushes.White, 700, 10);
+            Buffer.Graphics.DrawString(Score.ToString(), new Font(FontFamily.GenericSansSerif, 30, FontStyle.Bold), Brushes.White, 700, 10);
 
             Buffer.Render(); // Переносим содержимое буфера на экран
         }
@@ -214,7 +214,7 @@ namespace StarWars
                     __Asteroids[i].Update();
                     if (__Bullet != null && __Asteroids[i].Collision(__Bullet))
                     {
-                        __Score++;
+                        Score++;
                         __Asteroids.Remove(__Asteroids[i]);
                         for (int z = i; z < __Asteroids.Count; z++) __Asteroids[z].Update();
                         __Bullet = null;
@@ -225,11 +225,8 @@ namespace StarWars
                     {
                         __Asteroids[i].Spawn();
                         __Ship.HP_down();
-                        if (__Ship.HP < 1)
-                        {
-                            __Ship.Die();
-                            //break;
-                        }
+                        Score -= 5;
+                        if (__Ship.HP < 1) __Ship.Die();
                     }
                 }
             else
@@ -244,10 +241,12 @@ namespace StarWars
                 __Medicine = null;
             }
 
+            if (Score < 0) __Ship.Die();
 
             __Medicine?.Update();
 
             __Bullet?.Update();
+
 
         }
 

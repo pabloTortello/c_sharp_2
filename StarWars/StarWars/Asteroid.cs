@@ -55,6 +55,7 @@ namespace StarWars
             {
                 _Position.X = Game.Width;
                 _Position.Y = __Rnd.Next(0, Game.Height);
+                Game.Score--;
             }
         }
     }
