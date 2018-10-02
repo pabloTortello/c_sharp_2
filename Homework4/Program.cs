@@ -60,10 +60,39 @@ namespace Homework4
             }
             #endregion
 
+
+            MyList<int>.list = list;
+            MyList<int>.Test();
+
             Console.ReadKey();
+
+            
         }
 
         public static List<int> list;
         public static Dictionary<int, int> dict;
+    }
+
+    static class MyList<T>
+    {
+        static public List<T> list = new List<T>();
+        public static Dictionary<T, int> dict = new Dictionary<T, int>();
+
+        public static void Test()
+        {
+            foreach (T num in list)
+            {
+                if (!dict.TryGetValue(num, out int result))
+                    dict.Add(num, 0);
+                dict[num]++;
+            }
+
+            Console.WriteLine("Для обобщенной коллекции");
+
+            foreach (var item in dict)
+            {
+                Console.WriteLine($"{item.Key} - {item.Value}");
+            }
+        }
     }
 }
