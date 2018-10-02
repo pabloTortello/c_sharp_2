@@ -16,7 +16,7 @@ namespace StarWars
             Application.SetCompatibleTextRenderingDefault(false);
             #endregion
 
-            Application.Run(new Splashscreen());
+            //Application.Run(new Splashscreen());
 
 
 
@@ -57,7 +57,7 @@ namespace StarWars
             Game.Load(game_form);           // Загрузка данных игровой логики
             Game.Init(game_form);  // Инициализация игровой логики
 
-            Application.Run(new UserName());
+            //Application.Run(new UserName());
 
             game_form.Show();      // Показываем форму на экране
 

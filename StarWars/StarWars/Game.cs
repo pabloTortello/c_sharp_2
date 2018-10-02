@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace StarWars
 {
@@ -20,7 +21,7 @@ namespace StarWars
         /// <summary>Массив графических игровых объекотв</summary>
         private static GameObject[] __GameObjects;
 
-        private static Asteroid[] __Asteroids;
+        //private static Asteroid[] __Asteroids;
 
         private static Bullet __Bullet;
 
@@ -34,6 +35,10 @@ namespace StarWars
 
         public static string user_name;
 
+        private static int Asteroids_count { set; get; } = 10;
+
+        private static List<Asteroid> __Asteroids;
+        
         /// <summary>Буфер, в который будем проводить отрисовку графики очередного кадра</summary>
         public static BufferedGraphics Buffer { get; private set; }
 
@@ -56,18 +61,7 @@ namespace StarWars
                     new Point(__Rnd.Next(5, 7), 0),
                     new Size(5, 5));
 
-            const int asteroids_count = 10;
-            __Asteroids = new Asteroid[asteroids_count];
-
-            for (var i = 0; i < asteroids_count; i++)
-            {
-                var speed = __Rnd.Next(3, 7);
-                var size = __Rnd.Next(30, 50);
-                __Asteroids[i] = new Asteroid(
-                    new Point(__Rnd.Next(Width + 600), __Rnd.Next(0, Height)),
-                    new Point(-speed, speed),
-                    new Size(size, size));
-            }
+            New_asteroids();
 
             __Ship = new Ship(
                 new Point(10, 300),
@@ -82,6 +76,21 @@ namespace StarWars
                     new Point(10 + i * 40, 10),
                     new Point(0, 0),
                     new Size(30, 30));
+            }
+        }
+
+        private static void New_asteroids()
+        {
+            __Asteroids = new List<Asteroid>(Asteroids_count);
+
+            for (var i = 0; i < Asteroids_count; i++)
+            {
+                var speed = __Rnd.Next(3, 7);
+                var size = __Rnd.Next(30, 50);
+                __Asteroids.Add(new Asteroid(
+                    new Point(__Rnd.Next(Width, Width + 600), __Rnd.Next(0, Height)),
+                    new Point(-speed, speed),
+                    new Size(size, size)));
             }
         }
 
@@ -125,22 +134,23 @@ namespace StarWars
 
         private static void OnGameFormKeyPress(object sender, KeyEventArgs args)
         {
-            switch (args.KeyCode)
-            {
-                case Keys.ControlKey:
-                    var ship_location = __Ship.Rect.Location;
-                    __Bullet = new Bullet(new Point(ship_location.X + 38, ship_location.Y + 17), new Size(4, 1));
-                    break;
-                case Keys.Up:
-                    __Ship.Up();
-                    break;
-                case Keys.Down:
-                    __Ship.Down();
-                    break;
-                case Keys.W:
-                    __Ship.Die();
-                    break;
-            }   
+            if (__Timer.Enabled)
+                switch (args.KeyCode)
+                {
+                    case Keys.ControlKey:
+                        var ship_location = __Ship.Rect.Location;
+                        __Bullet = new Bullet(new Point(ship_location.X + 38, ship_location.Y + 17), new Size(4, 1));
+                        break;
+                    case Keys.Up:
+                        __Ship.Up();
+                        break;
+                    case Keys.Down:
+                        __Ship.Down();
+                        break;
+                    case Keys.W:
+                        __Ship.Die();
+                        break;
+                }   
         }
 
         private static void OnTimerTick_for_medicine(object Sender, EventArgs e)
@@ -157,7 +167,7 @@ namespace StarWars
         private static void OnTimerTick(object Sender, EventArgs e)
         {
             Update();
-            Draw();
+            if (__Timer.Enabled) Draw();
         }
 
         /// <summary>Метод отрисовки очередного кадра игры</summary>
@@ -198,19 +208,22 @@ namespace StarWars
             foreach (var game_object in __GameObjects)
                 game_object.Update(); // И вызываем у каждого метод обновления состояния
 
-            if (__Asteroids != null)
-                foreach (var asteroid in __Asteroids)
+            if (__Asteroids.Count > 0)
+                for (int i = 0; i < __Asteroids.Count; i++)
                 {
-                    asteroid.Update();
-                    if (__Bullet != null && asteroid.Collision(__Bullet)) 
+                    __Asteroids[i].Update();
+                    if (__Bullet != null && __Asteroids[i].Collision(__Bullet))
                     {
                         __Score++;
-                        asteroid.Spawn();
+                        __Asteroids.Remove(__Asteroids[i]);
+                        for (int z = i; z < __Asteroids.Count; z++) __Asteroids[z].Update();
                         __Bullet = null;
+                        break;
                     }
-                    if (__Ship != null && __Ship.Collision(asteroid))
+
+                    if (__Ship != null && __Ship.Collision(__Asteroids[i]))
                     {
-                        asteroid.Spawn();
+                        __Asteroids[i].Spawn();
                         __Ship.HP_down();
                         if (__Ship.HP < 1)
                         {
@@ -218,13 +231,42 @@ namespace StarWars
                             //break;
                         }
                     }
-
-                    if (__Ship != null && __Medicine != null && __Ship.Collision(__Medicine))
-                    {
-                        __Ship.HP_up();
-                        __Medicine = null;
-                    }
                 }
+            else
+            {
+                Asteroids_count++;
+                New_asteroids();
+            }
+
+            //foreach (var asteroid in __Asteroids)
+            //{
+            //    asteroid.Update();
+            //    if (__Bullet != null && asteroid.Collision(__Bullet))
+            //    {
+            //        __Score++;
+            //        //asteroid.Spawn();
+            //        __Asteroids.Remove(asteroid);
+            //        __Bullet = null;
+            //        break;
+            //    }
+            //    if (__Ship != null && __Ship.Collision(asteroid))
+            //    {
+            //        asteroid.Spawn();
+            //        __Ship.HP_down();
+            //        if (__Ship.HP < 1)
+            //        {
+            //            __Ship.Die();
+            //            //break;
+            //        }
+            //    }                 
+            //}
+
+            if (__Ship != null && __Medicine != null && __Ship.Collision(__Medicine))
+            {
+                __Ship.HP_up();
+                __Medicine = null;
+            }
+
 
             __Medicine?.Update();
 

@@ -27,7 +27,7 @@ namespace StarWars
         public override void Update()
         {
             if (_Position.X < Game.Width)
-                _Position.X += 15;
+                _Position.X += 30;
         }
     }
 }
