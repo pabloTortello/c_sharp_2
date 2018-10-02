@@ -238,29 +238,6 @@ namespace StarWars
                 New_asteroids();
             }
 
-            //foreach (var asteroid in __Asteroids)
-            //{
-            //    asteroid.Update();
-            //    if (__Bullet != null && asteroid.Collision(__Bullet))
-            //    {
-            //        __Score++;
-            //        //asteroid.Spawn();
-            //        __Asteroids.Remove(asteroid);
-            //        __Bullet = null;
-            //        break;
-            //    }
-            //    if (__Ship != null && __Ship.Collision(asteroid))
-            //    {
-            //        asteroid.Spawn();
-            //        __Ship.HP_down();
-            //        if (__Ship.HP < 1)
-            //        {
-            //            __Ship.Die();
-            //            //break;
-            //        }
-            //    }                 
-            //}
-
             if (__Ship != null && __Medicine != null && __Ship.Collision(__Medicine))
             {
                 __Ship.HP_up();
