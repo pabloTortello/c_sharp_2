@@ -105,7 +105,7 @@ namespace StarWars
             __Timer.Enabled = false;
             var g = Buffer.Graphics;
             g.Clear(Color.Black);
-            g.DrawString("GAME OVER", new Font(FontFamily.GenericSansSerif, 60, FontStyle.Bold), Brushes.White, 200, 100);
+            g.DrawImage(Image.FromFile("src/game_over.png"), 300, 150, 200, 200);
             Buffer.Render();
             __Ship = null;
         }
