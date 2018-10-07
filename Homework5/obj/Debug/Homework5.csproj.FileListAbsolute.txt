@@ -13,3 +13,7 @@ D:\C sharp 2\Lesson 5\Homework5\Homework5\obj\Debug\Homework5.csproj.GenerateRes
 D:\C sharp 2\Lesson 5\Homework5\Homework5\obj\Debug\Homework5.csproj.CoreCompileInputs.cache
 D:\C sharp 2\Lesson 5\Homework5\Homework5\obj\Debug\Homework5.exe
 D:\C sharp 2\Lesson 5\Homework5\Homework5\obj\Debug\Homework5.pdb
+D:\C sharp 2\Lesson 5\Homework5\Homework5\obj\Debug\Departaments.g.cs
+D:\C sharp 2\Lesson 5\Homework5\Homework5\obj\Debug\Departaments.baml
+D:\C sharp 2\Lesson 5\Homework5\Homework5\obj\Debug\AddEmployee.g.cs
+D:\C sharp 2\Lesson 5\Homework5\Homework5\obj\Debug\AddEmployee.baml

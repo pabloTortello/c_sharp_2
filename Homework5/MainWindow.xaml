@@ -5,6 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework5"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid/>
+        Title="MainWindow" Height="451" Width="545">
+    <Grid Margin="0,0,2,0">
+        <Menu HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" Width="535">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Управление отделами" Click="MenuItemDep_Click"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Добавить сотрудника" Click="AddEmployee_Click"></MenuItem>
+                <MenuItem Header="Редактировать данные" Click="ChangeEmployee_Click"></MenuItem>
+                <MenuItem Header="Удалить сотрудника" Click="DelEmployee_Click"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Выход"></MenuItem>
+
+            </MenuItem>
+
+        </Menu>
+        <ComboBox Name="DepartamentsComboBox" Margin="17,57,322,334" SelectionChanged ="DepartamentsComboBox_SelectionChanged"/>
+        <ListBox Name="EmployeesList" HorizontalAlignment="Center" Height="304" Margin="17,97,322,0" VerticalAlignment="Top" Width="196" SelectionChanged ="EmployeesList_MouseDown">
+        </ListBox>
+        <GridSplitter HorizontalAlignment="Left" Height="387" Margin="241,23,0,0" VerticalAlignment="Top" Width="3"/>
+        <Label HorizontalAlignment="Left" Content="Фамилия:" FontSize="12" Margin="279,33,0,0" VerticalAlignment="Top"/>
+        <TextBlock Name="LastNameText" HorizontalAlignment="Left" FontSize="20" Margin="279,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
+        <Label HorizontalAlignment="Left" Content="Имя:" FontSize="12" Margin="279,92,0,0" Height="26" VerticalAlignment="Top"/>
+        <TextBlock Name="NameText" HorizontalAlignment="Left" FontSize="20" Margin="279,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
+        <Label HorizontalAlignment="Left" Content="Отчество:" FontSize="12" Margin="279,151,0,0" VerticalAlignment="Top"/>
+        <TextBlock Name="MiddleNameText" HorizontalAlignment="Left" FontSize="20" Margin="279,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Label HorizontalAlignment="Left" Content="Дата рождения:" FontSize="12" Margin="279,210,0,0" VerticalAlignment="Top"/>
+        <TextBlock Name="DRText" HorizontalAlignment="Left" FontSize="20" Margin="279,236,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
+        <Label HorizontalAlignment="Left" Content="Должность:" FontSize="12" Margin="279,269,0,0" VerticalAlignment="Top"/>
+        <TextBlock Name="DoljnostText" HorizontalAlignment="Left" FontSize="20" Margin="279,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Label HorizontalAlignment="Left" Content="Отдел:" FontSize="12" Margin="279,327,0,0" VerticalAlignment="Top"/>
+        <TextBlock Name="DepartamentText" HorizontalAlignment="Left" FontSize="20" Margin="279,353,0,0" TextWrapping="Wrap" VerticalAlignment="Top" />
+        <Label HorizontalAlignment="Left" Content="Отдел:" FontSize="12" Margin="17,33,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
 </Window>
