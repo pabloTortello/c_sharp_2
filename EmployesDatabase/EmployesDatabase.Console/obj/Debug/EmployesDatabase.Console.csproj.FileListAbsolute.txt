@@ -1,0 +1,14 @@
+C:\Users\shmac\Documents\!GB\C#2-1\L7\src\EmployesDatabase\EmployesDatabase.Console\obj\Debug\EmployesDatabase.Console.csprojAssemblyReference.cache
+C:\Users\shmac\Documents\!GB\C#2-1\L7\src\EmployesDatabase\EmployesDatabase.Console\obj\Debug\EmployesDatabase.Console.csproj.CoreCompileInputs.cache
+C:\Users\shmac\Documents\!GB\C#2-1\L7\src\EmployesDatabase\EmployesDatabase.Console\bin\Debug\EmployesDatabase.Console.exe.config
+C:\Users\shmac\Documents\!GB\C#2-1\L7\src\EmployesDatabase\EmployesDatabase.Console\bin\Debug\EmployesDatabase.Console.exe
+C:\Users\shmac\Documents\!GB\C#2-1\L7\src\EmployesDatabase\EmployesDatabase.Console\bin\Debug\EmployesDatabase.Console.pdb
+C:\Users\shmac\Documents\!GB\C#2-1\L7\src\EmployesDatabase\EmployesDatabase.Console\obj\Debug\EmployesDatabase.Console.exe
+C:\Users\shmac\Documents\!GB\C#2-1\L7\src\EmployesDatabase\EmployesDatabase.Console\obj\Debug\EmployesDatabase.Console.pdb
+D:\C sharp 2\Lesson 7\EmployesDatabase\EmployesDatabase.Console\bin\Debug\EmployesDatabase.Console.exe.config
+D:\C sharp 2\Lesson 7\EmployesDatabase\EmployesDatabase.Console\bin\Debug\EmployesDatabase.Console.exe
+D:\C sharp 2\Lesson 7\EmployesDatabase\EmployesDatabase.Console\bin\Debug\EmployesDatabase.Console.pdb
+D:\C sharp 2\Lesson 7\EmployesDatabase\EmployesDatabase.Console\obj\Debug\EmployesDatabase.Console.csprojAssemblyReference.cache
+D:\C sharp 2\Lesson 7\EmployesDatabase\EmployesDatabase.Console\obj\Debug\EmployesDatabase.Console.csproj.CoreCompileInputs.cache
+D:\C sharp 2\Lesson 7\EmployesDatabase\EmployesDatabase.Console\obj\Debug\EmployesDatabase.Console.exe
+D:\C sharp 2\Lesson 7\EmployesDatabase\EmployesDatabase.Console\obj\Debug\EmployesDatabase.Console.pdb
