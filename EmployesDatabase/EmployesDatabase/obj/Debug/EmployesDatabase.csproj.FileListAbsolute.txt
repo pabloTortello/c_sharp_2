@@ -30,3 +30,21 @@ D:\C sharp 2\Lesson 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDataba
 D:\C sharp 2\Lesson 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDatabase.csproj.CoreCompileInputs.cache
 D:\C sharp 2\Lesson 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDatabase.exe
 D:\C sharp 2\Lesson 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDatabase.pdb
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDatabase.csprojAssemblyReference.cache
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\MainWindow.g.cs
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\App.g.cs
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDatabase_MarkupCompile.cache
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDatabase_MarkupCompile.lref
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDatabase.exe
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDatabase.pdb
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\bin\Debug\EmployesDatabase.exe.config
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\bin\Debug\EmployesDatabase.exe
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\bin\Debug\EmployesDatabase.pdb
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\MainWindow.baml
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDatabase.g.resources
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDatabase.Properties.Resources.resources
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDatabase.csproj.GenerateResource.cache
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\EmployesDatabase.csproj.CoreCompileInputs.cache
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\AddEmployee.g.cs
+D:\C sharp 2\Lesson 7\Homework 7\EmployesDatabase\EmployesDatabase\obj\Debug\AddEmployee.baml
