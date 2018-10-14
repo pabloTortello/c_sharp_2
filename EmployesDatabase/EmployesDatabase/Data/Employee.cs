@@ -24,20 +24,28 @@ namespace EmployesDatabase.Data
             set => Set(ref _Name, value);
         }
 
-        private DateTime _Birthday;
+        private string _Birthday;
 
-        public DateTime Birthday
+        public string Birthday
         {
             get => _Birthday;
             set => Set(ref _Birthday, value);
         }
 
-        private string _Email;
+        private string _Phone;
 
-        public string Email
+        public string Phone
         {
-            get => _Email;
-            set => Set(ref _Email, value);
+            get => _Phone;
+            set => Set(ref _Phone, value);
+        }
+
+        private string _Departamen;
+
+        public string Departament
+        {
+            get => _Departamen;
+            set => Set(ref _Departamen, value);
         }
 
     }
