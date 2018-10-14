@@ -16,7 +16,7 @@
         <Menu DockPanel.Dock="Top"></Menu>
         <StatusBar DockPanel.Dock="Bottom"></StatusBar>
         <UniformGrid DockPanel.Dock="Bottom" Columns="3" Margin="10">
-            <Button Content="Add" Margin="10" Command="{Binding AddCommand}"/>
+            <Button Content="Add" Margin="10" Click ="Button_Click"/>
             <Button Content="Remove" Margin="10" Command="{Binding RemoveCommand}"/>
             <Button Content="Edit" Margin="10" Command="{Binding EditCommand}"/>    
         </UniformGrid>
@@ -31,7 +31,8 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="E-mail" Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
+                <DataGridTextColumn Header="Departament" Binding="{Binding Departament}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

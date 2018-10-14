@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using EmployesDatabase.Data;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace EmployesDatabase
 {
     class MainWindowViewModel : ViewModel
     {
-        public ObservableCollection<Employee> Employes { get; } = new ObservableCollection<Employee>
-        {
-            //new Employee{ Id = 0, Name = "Ivanov", Birthday = DateTime.Today, Email = "qwe@asd.ru" },
-            //new Employee{ Id = 1, Name = "Petrov", Birthday = DateTime.Today, Email = "123@asd.ru" },
-            //new Employee{ Id = 2, Name = "Sidorov", Birthday = DateTime.Today, Email = "ZXC@asd.ru" },
-        };
+        private const string str_conection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EmployesDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+        public ObservableCollection<Employee> Employes { get; } = new ObservableCollection<Employee>();
 
         public ICommand AddCommand { get; }
         public ICommand RemoveCommand { get; }
@@ -28,6 +28,36 @@ namespace EmployesDatabase
             AddCommand = new LambdaCommand(OnAddCommandExecuted);
             RemoveCommand = new LambdaCommand(OnRemoveCommandExecuted);
             EditCommand = new LambdaCommand(OnEditCommandExecuted);
+
+            string sql = "SELECT Employes.ID, Employes.Name, Employes.Birthday, Employes.Phone, Departaments.Name " +
+                "FROM Employes, Departaments WHERE Departaments.Id = Employes.ID_Departament";
+            using (var connection = new SqlConnection(str_conection))
+            {
+                connection.Open();
+
+                var command = new SqlCommand(sql, connection);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Employes.Add(new Employee
+                        {
+                            Id = (int)reader["ID"],
+                            Name = (string)reader["Name"],
+                            Birthday = (string)reader["Birthday"],
+                            Phone = (string)reader["Phone"],
+                            Departament = (string)reader.GetValue(4)
+                        });
+                    }
+                }
+            }
+        }
+
+        private void OnClickAddWindow()
+        {
+            AddEmployee addEmployee = new AddEmployee();
+            addEmployee.Show();
         }
 
         private void OnEditCommandExecuted(object obj)
@@ -42,7 +72,7 @@ namespace EmployesDatabase
 
         private void OnAddCommandExecuted(object obj)
         {
-            MessageBox.Show("Команда добавления");
+            
         }
     }
 }
